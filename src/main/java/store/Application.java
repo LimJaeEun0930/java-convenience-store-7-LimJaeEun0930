@@ -2,6 +2,9 @@ package store;
 
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        AppConfig.setPromotions();
+        for (Promotion p : Promotion.promotions) {
+            System.out.println(p);
+        }
     }
 }
