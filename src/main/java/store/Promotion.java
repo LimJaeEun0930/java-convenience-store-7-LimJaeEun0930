@@ -20,6 +20,10 @@ public class Promotion {
         this.endDate = endDate;
     }
 
+    public String getPromotionName() {
+        return name;
+    }
+
     @Override
     public String toString() {
         StringBuffer sb = new StringBuffer();
