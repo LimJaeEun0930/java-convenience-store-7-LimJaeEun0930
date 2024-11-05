@@ -1,13 +1,14 @@
-package store;
+package store.config;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import store.Promotion;
 
 public class PromotionManager {
 
-    public static void loadPromotionsFromFile(String filename) {
+    static void loadPromotionsFromFile(String filename) {
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
             reader.readLine(); // 첫 번째 줄 (헤더) 무시

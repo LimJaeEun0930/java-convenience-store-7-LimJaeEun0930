@@ -1,12 +1,13 @@
-package store;
+package store.config;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import store.Product;
 
 public class ProductManager {
 
-    public static void loadProductsFromFile(String filename) {
+    static void loadProductsFromFile(String filename) {
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
             reader.readLine();
