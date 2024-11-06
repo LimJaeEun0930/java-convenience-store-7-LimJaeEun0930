@@ -1,8 +1,9 @@
 package store.config;
 
-import static store.Constants.PRODUCTS_FILE;
-import static store.Constants.PROMOTIONS_FILE;
+import static store.config.Constants.PRODUCTS_FILE;
+import static store.config.Constants.PROMOTIONS_FILE;
 
+import store.view.InputView;
 import store.view.OutputView;
 
 public class AppConfig {
@@ -11,6 +12,7 @@ public class AppConfig {
         setPromotions();
         setProducts();
         OutputView.getInstance();
+        InputView.getInstance();
     }
 
     private static void setPromotions() {
