@@ -3,9 +3,10 @@ package store;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Promotion {
-    public static final ArrayList<Promotion> promotions = new ArrayList<>();
+    public static final HashMap<String, Promotion> promotions = new HashMap<>();
     private String name;
     private int buy;
     private int get;
@@ -44,7 +45,7 @@ public class Promotion {
         int get = Integer.parseInt(parts[2]);
         LocalDateTime startDate = LocalDateTime.parse(parts[3].trim() + "T00:00:00");
         LocalDateTime endDate = LocalDateTime.parse(parts[4].trim() + "T00:00:00");
-        promotions.add(new Promotion(name, buy, get, startDate, endDate));
+        promotions.put(name, new Promotion(name, buy, get, startDate, endDate));
     }
 
 }
