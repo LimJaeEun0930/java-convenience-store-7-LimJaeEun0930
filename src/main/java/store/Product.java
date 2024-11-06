@@ -39,4 +39,23 @@ public class Product {
                 .equals(parts[3])).findFirst().orElse(null);
         products.add(new Product(name, price, quantity, promozion));
          }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public String getPromotion() {
+        if (promotion != null) {
+            return promotion.getPromotionName();
+        }
+        return "";
+    }
 }

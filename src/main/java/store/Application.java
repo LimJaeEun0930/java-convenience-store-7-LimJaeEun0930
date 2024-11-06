@@ -1,10 +1,13 @@
 package store;
 
+import static store.view.OutputView.outputView;
+
+import store.config.AppConfig;
+
 public class Application {
     public static void main(String[] args) {
-        AppConfig.setPromotions();
-        for (Promotion p : Promotion.promotions) {
-            System.out.println(p);
-        }
+        AppConfig.run();
+        outputView.printProducts();
+//
     }
 }
