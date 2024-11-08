@@ -24,9 +24,34 @@ public class OutputView {
         System.out.println(OUT_PRODUCT_SHOW_MESSAGE);
         System.out.println();
         for (Product product : Product.products.values()) {
-            System.out.printf(OUT_PRODUCT_DISPLAY_FORMAT + "%n", product.getName(), product.getPrice(), product.getQuantity(), product.getPromotion());
+            printProduct(product);
         }
         System.out.println();
     }
 
+
+    private void printProduct(Product product) {
+        if (product.getPromotionName() == "") {
+            toStringWithNoPromtion(product);
+            return;
+        }
+        toStringWithPromotion(product);
+        toStringWithNoPromtion(product);
+    }
+
+    private void toStringWithNoPromtion(Product product) {
+        System.out.printf(OUT_PRODUCT_DISPLAY_FORMAT + "%n", product.getName(), product.getPrice(), getFormattedQuantity(product.getQuantity()), "");
+    }
+    private void toStringWithPromotion(Product product) {
+        System.out.printf(OUT_PRODUCT_DISPLAY_FORMAT + "%n", product.getName(), product.getPrice(), getFormattedQuantity(product.getPromotionQuantity()), product.getPromotionName());
+    }
+
+    private String getFormattedQuantity(int quantity) {
+        if (quantity == 0) {
+            return "재고없음";
+        }
+        return quantity + "개";
+    }
 }
+
+
