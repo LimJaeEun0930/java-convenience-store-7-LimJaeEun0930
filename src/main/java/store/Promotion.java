@@ -2,7 +2,6 @@ package store;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Promotion {
@@ -21,20 +20,30 @@ public class Promotion {
         this.endDate = endDate;
     }
 
-    public String getPromotionName() {
+    public String getName() {
         return name;
+    }
+
+    public int getPromoPack() {
+        return buy + get;
+    }
+
+    public int getBuy() {
+        return buy;
+    }
+
+    public int getGet() {
+        return get;
     }
 
     @Override
     public String toString() {
         StringBuffer sb = new StringBuffer();
-        sb.append(name)
-                .append(',')
-                .append(buy)
-                .append(',')
-                .append(get)
-                .append(startDate.format(DateTimeFormatter.ISO_DATE))
-                .append(endDate.format(DateTimeFormatter.ISO_DATE));
+        sb.append(name).append(',')
+          .append(buy).append(',')
+          .append(get).append(',')
+          .append(startDate.format(DateTimeFormatter.ISO_DATE)).append(',')
+          .append(endDate.format(DateTimeFormatter.ISO_DATE));
         return sb.toString();
     }
 

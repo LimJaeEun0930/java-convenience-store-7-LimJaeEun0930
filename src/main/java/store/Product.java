@@ -82,6 +82,10 @@ public class Product {
         return promotionQuantity;
     }
 
+    public Promotion getPromotion() {
+        return promotion;
+    }
+
     public String getPromotionName() {
         if (promotion != null) {
             return promotion.getName();
