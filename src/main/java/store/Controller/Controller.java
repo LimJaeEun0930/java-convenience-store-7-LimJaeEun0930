@@ -12,15 +12,17 @@ public class Controller {
 
     public void run() {
         outputView.printProducts();
-        ArrayList<ProductDTO> wishList = inputView.inputPurchaseProducts();
-        searchProductPromotion(wishList);
+        ArrayList<ProductDTO> shoppingCart = inputView.inputPurchaseProducts();
+        searchProductPromotion(shoppingCart);
+        inputView.inputAdditionalPromoOption(shoppingCart);
+
 
     }
 
-    private void searchProductPromotion(ArrayList<ProductDTO> wishList) {
-        for (ProductDTO dto : wishList) {
+    private void searchProductPromotion(ArrayList<ProductDTO> shoppingCart) {
+        for (ProductDTO dto : shoppingCart) {
             Product wishProduct = products.get(dto.getName());
-            if (dto.getQuantity() % wishProduct.getPromotion().getPromoPack() == wishProduct.getPromotion().getBuy()) {
+            if (dto.getQuantity() % wishProduct.getPromotion().getPromoPack() == wishProduct.getPromotion().getBuy() || dto.getQuantity() > wishProduct.getPromotionQuantity()) {
                 evaluatePromotionEligibility(dto);
             }
         }
