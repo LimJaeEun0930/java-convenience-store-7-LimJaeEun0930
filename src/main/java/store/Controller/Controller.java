@@ -22,8 +22,10 @@ public class Controller {
     private void searchProductPromotion(ArrayList<ProductDTO> shoppingCart) {
         for (ProductDTO dto : shoppingCart) {
             Product wishProduct = products.get(dto.getName());
-            if (dto.getQuantity() % wishProduct.getPromotion().getPromoPack() == wishProduct.getPromotion().getBuy() || dto.getQuantity() > wishProduct.getPromotionQuantity()) {
-                evaluatePromotionEligibility(dto);
+            if (wishProduct.getPromotion() != null) {
+                if (dto.getQuantity() % wishProduct.getPromotion().getPromoPack() == wishProduct.getPromotion().getBuy() || dto.getQuantity() > wishProduct.getPromotionQuantity()) {
+                    evaluatePromotionEligibility(dto);
+                }
             }
         }
     }
