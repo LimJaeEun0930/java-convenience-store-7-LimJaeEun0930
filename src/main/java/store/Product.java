@@ -4,6 +4,7 @@ import static store.Promotion.promotions;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import store.dto.ProductToCalculateDTO;
 
 public class Product {
     public static final HashMap<String, Product> products = new LinkedHashMap<>();
@@ -91,5 +92,10 @@ public class Product {
             return promotion.getName();
         }
         return "";
+    }
+
+    public void applyDecreasement(ProductToCalculateDTO productDelta) {
+        this.quantity -= productDelta.getQuantity();
+        this.promotionQuantity -= productDelta.getPromotionQuantity();
     }
 }

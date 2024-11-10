@@ -5,18 +5,46 @@ import static store.view.InputView.inputView;
 import static store.view.OutputView.outputView;
 
 import java.util.ArrayList;
+import store.ConfirmedPurchaseProducts;
 import store.Product;
+import store.config.ProductManager;
 import store.dto.ProductDTO;
+import store.dto.ProductToCalculateDTO;
 
 public class Controller {
 
-    public void run() {
+    public void run() { //////////////////TODO: ProductManager.updateProductFile 구현해야함!!!!
+        boolean keepGoing = true;
+        while (keepGoing) {
         outputView.printProducts();
         ArrayList<ProductDTO> shoppingCart = inputView.inputPurchaseProducts();
+        checkPromotionWithPromptIfNecessary(shoppingCart);
+        ArrayList<ProductToCalculateDTO> productsToApply = getProductsToApply(shoppingCart);
+        ProductManager.updateProductFile(productsToApply);
+        ConfirmedPurchaseProducts confirmedPurchaseProducts = inputView.inputGetMemberShipDiscountOrNot(productsToApply);
+        keepGoing = lastProcess(confirmedPurchaseProducts);
+        }
+    }
+
+    private static boolean lastProcess(ConfirmedPurchaseProducts confirmedPurchaseProducts) {
+        boolean keepGoing;
+        outputView.printReceipt(confirmedPurchaseProducts);
+        keepGoing = inputView.inputBuyAgainOrNot();
+        return keepGoing;
+    }
+
+    private void checkPromotionWithPromptIfNecessary(ArrayList<ProductDTO> shoppingCart) {
         searchProductPromotion(shoppingCart);
         inputView.inputAdditionalPromoOption(shoppingCart);
+    }
 
-
+    private ArrayList<ProductToCalculateDTO> getProductsToApply(ArrayList<ProductDTO> shoppingCart) {
+        ArrayList<ProductToCalculateDTO> productsToApply = new ArrayList<>();
+        for (ProductDTO productToBuy : shoppingCart) {
+            ProductToCalculateDTO productToApply = ProductToCalculateDTO.getInstance(productToBuy);
+            productsToApply.add(productToApply);
+        }
+        return productsToApply;
     }
 
     private void searchProductPromotion(ArrayList<ProductDTO> shoppingCart) {
