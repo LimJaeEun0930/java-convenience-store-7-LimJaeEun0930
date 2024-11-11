@@ -1,8 +1,6 @@
 package store;
 
-import static store.view.OutputView.outputView;
-
-import store.Controller.Controller;
+import store.controller.Controller;
 import store.config.AppConfig;
 
 public class Application {

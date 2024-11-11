@@ -1,6 +1,6 @@
-package store;
+package store.model;
 
-import static store.Promotion.promotions;
+import static store.model.Promotion.promotions;
 
 import camp.nextstep.edu.missionutils.DateTimes;
 import java.util.HashMap;

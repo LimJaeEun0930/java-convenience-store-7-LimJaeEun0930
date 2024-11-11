@@ -1,12 +1,11 @@
 package store.config;
 
-import static store.Product.products;
-import static store.config.Constants.CANNOT_READ_FILE;
+import static store.config.Constants.ERROR_CANNOT_READ_FILE;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import store.Product;
+import store.model.Product;
 
 public class ProductManager {
 
@@ -18,7 +17,7 @@ public class ProductManager {
                 Product.readProduct(line);
             }
         } catch (IOException e) {
-            System.out.println(CANNOT_READ_FILE);
+            System.out.println(ERROR_CANNOT_READ_FILE);
         }
     }
 }

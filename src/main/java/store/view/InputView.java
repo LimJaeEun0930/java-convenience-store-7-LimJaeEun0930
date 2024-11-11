@@ -1,16 +1,16 @@
 package store.view;
 
-import static store.Product.products;
+import static store.model.Product.products;
 import static store.config.Constants.IN_ADDITIONAL_PROMO_OR_NOT;
 import static store.config.Constants.IN_BUY_AGAIN;
 import static store.config.Constants.IN_BUY_WITH_REGULAR_PRICE_OR_NOT;
 import static store.config.Constants.IN_MEMBERSHIP_DISCOUNT_OR_NOT;
 import static store.config.Constants.IN_PRODUCT_NAME_QUANTITY;
-import static store.config.Constants.IN_WRONG_INPUT_ETC;
+import static store.config.Constants.ERROR_IN_WRONG_INPUT_ETC;
 
 import camp.nextstep.edu.missionutils.Console;
 import java.util.ArrayList;
-import store.ConfirmedPurchaseProducts;
+import store.model.ConfirmedPurchaseProducts;
 import store.dto.ProductDTO;
 import store.dto.ProductToCalculateDTO;
 import store.parser.ProductParser;
@@ -35,7 +35,7 @@ public class InputView {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             } catch (StringIndexOutOfBoundsException e) {
-                System.out.println(IN_WRONG_INPUT_ETC);
+                System.out.println(ERROR_IN_WRONG_INPUT_ETC);
             }
         }
     }
@@ -60,7 +60,7 @@ public class InputView {
             if (input.equals("N")) {
                 return false;
             }
-            System.out.println(IN_WRONG_INPUT_ETC);
+            System.out.println(ERROR_IN_WRONG_INPUT_ETC);
         }
     }
 
@@ -73,7 +73,7 @@ public class InputView {
             if (input.equals("N")) {
                 return wishProduct.decreaseQuantity(calculateNoPromotionCount(wishProduct));
             }
-            System.out.println(IN_WRONG_INPUT_ETC);
+            System.out.println(ERROR_IN_WRONG_INPUT_ETC);
         }
     }
 
@@ -91,7 +91,7 @@ public class InputView {
             if (input.equals("N")) {
                 return false;
             }
-            System.out.println(IN_WRONG_INPUT_ETC);
+            System.out.println(ERROR_IN_WRONG_INPUT_ETC);
         }
     }
 
@@ -110,7 +110,7 @@ public class InputView {
             if (input.equals("N")) {
                 return new ConfirmedPurchaseProducts(false, productsToCalculate);
             }
-            System.out.println(IN_WRONG_INPUT_ETC);
+            System.out.println(ERROR_IN_WRONG_INPUT_ETC);
         }
     }
 }

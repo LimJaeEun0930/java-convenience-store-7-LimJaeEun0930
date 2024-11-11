@@ -1,6 +1,6 @@
 package store.dto;
 
-import static store.Product.products;
+import static store.model.Product.products;
 
 public class ProductDTO {
     private String name;

@@ -1,9 +1,8 @@
 package store.dto;
 
-import static store.Product.products;
+import static store.model.Product.products;
 
-import store.Product;
-import store.Promotion;
+import store.model.Product;
 
 public class ProductWithoutPromoDTO extends ProductToCalculateDTO {
 

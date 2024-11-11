@@ -1,12 +1,10 @@
 package store.parser;
 
-import static store.Product.products;
-import static store.config.Constants.CANNOT_BUY_PRODUCT_OVER_QUANTITY;
-import static store.config.Constants.NON_EXIST_PRODUCT;
+import static store.model.Product.products;
+import static store.config.Constants.ERROR_CANNOT_BUY_PRODUCT_OVER_QUANTITY;
+import static store.config.Constants.ERROR_NON_EXIST_PRODUCT;
 
 import java.util.ArrayList;
-import java.util.List;
-import store.Product;
 import store.dto.ProductDTO;
 
 public class ProductParser {
@@ -27,8 +25,8 @@ public class ProductParser {
             return new ProductDTO(name, quantity);
         }
         if (products.get(name) == null) {
-            throw new IllegalArgumentException(NON_EXIST_PRODUCT);
+            throw new IllegalArgumentException(ERROR_NON_EXIST_PRODUCT);
         }
-        throw new IllegalArgumentException(CANNOT_BUY_PRODUCT_OVER_QUANTITY);
+        throw new IllegalArgumentException(ERROR_CANNOT_BUY_PRODUCT_OVER_QUANTITY);
     }
 }

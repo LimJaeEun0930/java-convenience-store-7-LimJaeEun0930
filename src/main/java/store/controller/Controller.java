@@ -1,13 +1,13 @@
-package store.Controller;
+package store.controller;
 
-import static store.Product.isInPromotionDuration;
-import static store.Product.products;
+import static store.model.Product.isInPromotionDuration;
+import static store.model.Product.products;
 import static store.view.InputView.inputView;
 import static store.view.OutputView.outputView;
 
 import java.util.ArrayList;
-import store.ConfirmedPurchaseProducts;
-import store.Product;
+import store.model.ConfirmedPurchaseProducts;
+import store.model.Product;
 import store.dto.ProductDTO;
 import store.dto.ProductToCalculateDTO;
 

@@ -1,10 +1,10 @@
 package store.dto;
 
-import static store.Product.isInPromotionDuration;
-import static store.Product.products;
+import static store.model.Product.isInPromotionDuration;
+import static store.model.Product.products;
 
-import store.Product;
-import store.Promotion;
+import store.model.Product;
+import store.model.Promotion;
 
 public abstract class ProductToCalculateDTO {
     protected String name;
