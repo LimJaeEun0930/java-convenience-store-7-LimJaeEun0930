@@ -7,18 +7,15 @@ import static store.config.Constants.OUT_RECEIPT_GIFT_NAME_QUANTITY;
 import static store.config.Constants.OUT_RECEIPT_HEADER;
 import static store.config.Constants.OUT_RECEIPT_MEMBERSHIP_DISCOUNT;
 import static store.config.Constants.OUT_RECEIPT_PAY_MONEY;
-import static store.config.Constants.OUT_RECEIPT_PRODUCT_NAME;
 import static store.config.Constants.OUT_RECEIPT_PRODUCT_NAME_QUANTITY_PRICE;
-import static store.config.Constants.OUT_RECEIPT_PRODUCT_PRICE;
-import static store.config.Constants.OUT_RECEIPT_PRODUCT_QUANTITY;
+import static store.config.Constants.OUT_RECEIPT_PRODUCT_NAME_QUANTITY_PRICE_IMPL;
 import static store.config.Constants.OUT_RECEIPT_PROMOTION_DISCOUNT;
 import static store.config.Constants.OUT_RECEIPT_SEPARATION_LINE;
 import static store.config.Constants.OUT_RECEIPT_TOTAL_PRICE;
 import static store.config.Constants.OUT_WELCOME_MESSAGE;
 
-import java.text.DecimalFormat;
-import store.ConfirmedPurchaseProducts;
-import store.Product;
+import store.model.ConfirmedPurchaseProducts;
+import store.model.Product;
 import store.dto.ProductToCalculateDTO;
 
 public class OutputView {
@@ -72,12 +69,20 @@ public class OutputView {
     private void printTotalProducts(final ConfirmedPurchaseProducts products) {
         System.out.println(OUT_RECEIPT_HEADER);
         System.out.println(OUT_RECEIPT_PRODUCT_NAME_QUANTITY_PRICE);
-        DecimalFormat formatter = new DecimalFormat("###,###");
         for (ProductToCalculateDTO product : products.getProducts()) {
-            System.out.printf(OUT_RECEIPT_PRODUCT_NAME, product.getName());
-            System.out.printf(OUT_RECEIPT_PRODUCT_QUANTITY, product.getTotalQuantity());
-            System.out.printf(OUT_RECEIPT_PRODUCT_PRICE + "%n", formatter.format(product.getTotalPriceWithoutDiscount()));
+            printProducts(product);
         }
+    }
+
+    private void printProducts(ProductToCalculateDTO product) {
+        StringBuffer sb = new StringBuffer(product.getName());
+        int productNameLength = product.getName().length();
+        int tabCount = 3 - (productNameLength) / 4;
+        for (int i = 0; i < tabCount; ++i) {
+            sb.append("\t");
+        }
+        System.out.printf(OUT_RECEIPT_PRODUCT_NAME_QUANTITY_PRICE_IMPL + "%n", sb, product.getTotalQuantity(),
+                String.format("%,d", product.getTotalPriceWithoutDiscount()));
     }
 
     private void printProduct(final Product product) {
