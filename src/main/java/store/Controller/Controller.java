@@ -4,6 +4,7 @@ import static store.Product.products;
 import static store.view.InputView.inputView;
 import static store.view.OutputView.outputView;
 
+import camp.nextstep.edu.missionutils.DateTimes;
 import java.util.ArrayList;
 import store.ConfirmedPurchaseProducts;
 import store.Product;
@@ -50,7 +51,7 @@ public class Controller {
     private void searchProductPromotion(ArrayList<ProductDTO> shoppingCart) {
         for (ProductDTO dto : shoppingCart) {
             Product wishProduct = products.get(dto.getName());
-            if (wishProduct.getPromotion() != null) {
+            if (wishProduct.getPromotion() != null && isInPromotionDuration(wishProduct)) {
                 if (dto.getQuantity() % wishProduct.getPromotion().getPromoPack() == wishProduct.getPromotion().getBuy() || dto.getQuantity() > wishProduct.getPromotionQuantity()) {
                     evaluatePromotionEligibility(dto);
                 }
@@ -58,6 +59,13 @@ public class Controller {
         }
     }
 
+    public static boolean isInPromotionDuration(Product wishProduct) {
+        if (wishProduct.getPromotion() != null) {
+            return DateTimes.now().isAfter(wishProduct.getPromotion().getStartDate()) && DateTimes.now()
+                    .isBefore(wishProduct.getPromotion().getEndDate());
+        }
+        return false;
+    }
     private void evaluatePromotionEligibility(ProductDTO dto) {
         Product wishProduct = products.get(dto.getName());
         if (dto.getQuantity() + wishProduct.getPromotion().getGet() <= wishProduct.getPromotionQuantity()) {

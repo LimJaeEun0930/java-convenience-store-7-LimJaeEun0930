@@ -2,6 +2,7 @@ package store;
 
 import static store.Promotion.promotions;
 
+import camp.nextstep.edu.missionutils.DateTimes;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import store.dto.ProductToCalculateDTO;
@@ -25,14 +26,16 @@ public class Product {
             this.quantity = quantity;
         }
     }
-
+/*if (DateTimes.now().isAfter(promotion.getStartDate()) && DateTimes.now().isBefore(promotion.getEndDate())) {
+                this.promotionQuantity = quantity;
+                return;
+            }*/
     public void setAnotherQuantity(int quantity, Promotion promotion) {
-        if (promotion == null) {
-            this.quantity = quantity;
-        }
         if (promotion != null) {
             this.promotionQuantity = quantity;
+            return;
         }
+        this.quantity = quantity;
     }
     @Override
     public String toString() {

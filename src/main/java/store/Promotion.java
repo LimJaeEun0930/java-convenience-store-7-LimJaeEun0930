@@ -36,6 +36,14 @@ public class Promotion {
         return get;
     }
 
+    public LocalDateTime getStartDate() {
+        return startDate;
+    }
+
+    public LocalDateTime getEndDate() {
+        return endDate;
+    }
+
     @Override
     public String toString() {
         StringBuffer sb = new StringBuffer();

@@ -1,5 +1,6 @@
 package store.dto;
 
+import static store.Controller.Controller.isInPromotionDuration;
 import static store.Product.products;
 
 import store.Product;
@@ -34,6 +35,9 @@ public abstract class ProductToCalculateDTO {
     }
 
     public int getPromotionUnappliedPrice() { // 멤버십 할인에 사용
+        if (!isInPromotionDuration(products.get(this.name))) {
+            unAppliedPromotionQuantity = promotionQuantity;
+        }
         return (quantity + unAppliedPromotionQuantity) * price;
     }
 
@@ -46,7 +50,10 @@ public abstract class ProductToCalculateDTO {
     }
 
     public int getPromotionDiscountPrice() { //프로모션 할인 금액
-        return promotionGetQuantity * price;
+        if (isInPromotionDuration(products.get(this.name))) {
+            return promotionGetQuantity * price;
+        }
+        return 0;
     }
 
     public int getPromotionQuantity() {
