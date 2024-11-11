@@ -7,7 +7,7 @@ import store.Promotion;
 
 public class ProductWithoutPromoDTO extends ProductToCalculateDTO {
 
-    public ProductWithoutPromoDTO(ProductDTO productDTO) {
+    public ProductWithoutPromoDTO(final ProductDTO productDTO) {
         super();
         this.name = productDTO.getName();
         Product product = products.get(productDTO.getName());

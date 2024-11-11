@@ -1,32 +1,37 @@
 package store.Controller;
 
+import static store.Product.isInPromotionDuration;
 import static store.Product.products;
 import static store.view.InputView.inputView;
 import static store.view.OutputView.outputView;
 
-import camp.nextstep.edu.missionutils.DateTimes;
 import java.util.ArrayList;
 import store.ConfirmedPurchaseProducts;
 import store.Product;
-import store.config.ProductManager;
 import store.dto.ProductDTO;
 import store.dto.ProductToCalculateDTO;
 
 public class Controller {
 
-    public void run() { //////////////////TODO: ProductManager.updateProductFile 구현해야함!!!!
+    public void run() {
         boolean keepGoing = true;
         while (keepGoing) {
         outputView.printProducts();
         ArrayList<ProductDTO> shoppingCart = inputView.inputPurchaseProducts();
         checkPromotionWithPromptIfNecessary(shoppingCart);
         ArrayList<ProductToCalculateDTO> productsToApply = getProductsToApply(shoppingCart);
-        ProductManager.updateProductFile(productsToApply);
+        applyDecreasementToQuantity(productsToApply);
         ConfirmedPurchaseProducts confirmedPurchaseProducts = inputView.inputGetMemberShipDiscountOrNot(productsToApply);
         keepGoing = lastProcess(confirmedPurchaseProducts);
         }
     }
 
+    private void applyDecreasementToQuantity(ArrayList<ProductToCalculateDTO> productsToApply) {
+        for (ProductToCalculateDTO productDelta : productsToApply) {
+            Product product = products.get(productDelta.getName());
+            product.applyDecreasement(productDelta);
+        }
+    }
     private static boolean lastProcess(ConfirmedPurchaseProducts confirmedPurchaseProducts) {
         boolean keepGoing;
         outputView.printReceipt(confirmedPurchaseProducts);
@@ -59,13 +64,7 @@ public class Controller {
         }
     }
 
-    public static boolean isInPromotionDuration(Product wishProduct) {
-        if (wishProduct.getPromotion() != null) {
-            return DateTimes.now().isAfter(wishProduct.getPromotion().getStartDate()) && DateTimes.now()
-                    .isBefore(wishProduct.getPromotion().getEndDate());
-        }
-        return false;
-    }
+
     private void evaluatePromotionEligibility(ProductDTO dto) {
         Product wishProduct = products.get(dto.getName());
         if (dto.getQuantity() + wishProduct.getPromotion().getGet() <= wishProduct.getPromotionQuantity()) {
@@ -76,6 +75,5 @@ public class Controller {
             dto.setNotEnoughQuantityForPromo();
         }
     }
-
 
 }

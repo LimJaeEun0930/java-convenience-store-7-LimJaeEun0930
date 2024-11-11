@@ -9,7 +9,6 @@ import static store.config.Constants.OUT_RECEIPT_MEMBERSHIP_DISCOUNT;
 import static store.config.Constants.OUT_RECEIPT_PAY_MONEY;
 import static store.config.Constants.OUT_RECEIPT_PRODUCT_NAME;
 import static store.config.Constants.OUT_RECEIPT_PRODUCT_NAME_QUANTITY_PRICE;
-//import static store.config.Constants.OUT_RECEIPT_PRODUCT_NAME_QUANTITY_PRICE_IMPL;
 import static store.config.Constants.OUT_RECEIPT_PRODUCT_PRICE;
 import static store.config.Constants.OUT_RECEIPT_PRODUCT_QUANTITY;
 import static store.config.Constants.OUT_RECEIPT_PROMOTION_DISCOUNT;
@@ -18,7 +17,6 @@ import static store.config.Constants.OUT_RECEIPT_TOTAL_PRICE;
 import static store.config.Constants.OUT_WELCOME_MESSAGE;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import store.ConfirmedPurchaseProducts;
 import store.Product;
 import store.dto.ProductToCalculateDTO;
@@ -46,13 +44,13 @@ public class OutputView {
         System.out.println();
     }
 
-    public void printReceipt(ConfirmedPurchaseProducts products) {
+    public void printReceipt(final ConfirmedPurchaseProducts products) {
         printTotalProducts(products);
         printGifts(products);
         printPayment(products);
     }
 
-    private void printPayment(ConfirmedPurchaseProducts products) {
+    private void printPayment(final ConfirmedPurchaseProducts products) {
         System.out.println(OUT_RECEIPT_SEPARATION_LINE);
     System.out.printf(OUT_RECEIPT_TOTAL_PRICE + "%n", products.getQuantitySum(), String.format("%,8d", products.getTotalConsumePrice()));
     System.out.printf(OUT_RECEIPT_PROMOTION_DISCOUNT + "%n", String.format("%,d", products.getPromotionDiscountPrice()));
@@ -62,7 +60,7 @@ public class OutputView {
 
     }
 
-    private static void printGifts(ConfirmedPurchaseProducts products) {
+    private static void printGifts(final ConfirmedPurchaseProducts products) {
         System.out.println(OUT_RECEIPT_GIFT);
         for (ProductToCalculateDTO product : products.getProducts()) {
             if (product.getPromotionDiscountPrice() != 0) {
@@ -71,7 +69,7 @@ public class OutputView {
         }
     }
 
-    private void printTotalProducts(ConfirmedPurchaseProducts products) {
+    private void printTotalProducts(final ConfirmedPurchaseProducts products) {
         System.out.println(OUT_RECEIPT_HEADER);
         System.out.println(OUT_RECEIPT_PRODUCT_NAME_QUANTITY_PRICE);
         DecimalFormat formatter = new DecimalFormat("###,###");
@@ -82,7 +80,7 @@ public class OutputView {
         }
     }
 
-    private void printProduct(Product product) {
+    private void printProduct(final Product product) {
         if (product.getPromotionName() == "") {
             toStringWithNoPromtion(product);
             return;
@@ -91,14 +89,14 @@ public class OutputView {
         toStringWithNoPromtion(product);
     }
 
-    private void toStringWithNoPromtion(Product product) {
+    private void toStringWithNoPromtion(final Product product) {
         System.out.printf(OUT_PRODUCT_DISPLAY_FORMAT + "%n", product.getName(), String.format("%,d", product.getPrice()), getFormattedQuantity(product.getQuantity()), "");
     }
-    private void toStringWithPromotion(Product product) {
+    private void toStringWithPromotion(final Product product) {
         System.out.printf(OUT_PRODUCT_DISPLAY_FORMAT + "%n", product.getName(), String.format("%,d", product.getPrice()), getFormattedQuantity(product.getPromotionQuantity()), product.getPromotionName());
     }
 
-    private String getFormattedQuantity(int quantity) {
+    private String getFormattedQuantity(final int quantity) {
         if (quantity == 0) {
             return "재고 없음";
         }

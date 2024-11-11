@@ -32,6 +32,3 @@ public static final String OUT_RECEIPT_PAY_MONEY = "내실돈\t\t\t\t\t\t%s";
     public static final String CANNOT_READ_FILE = "[ERROR] 파일을 불러들이지 못했습니다.";
     public static final String CANNOT_BUY_PRODUCT_OVER_QUANTITY = "[ERROR] 재고 수량을 초과하여 구매할 수 없습니다. 다시 입력해 주세요.";
 }
-//=======
-//콜라                  3         3,000
-//에너지바                5

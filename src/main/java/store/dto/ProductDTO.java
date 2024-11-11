@@ -12,14 +12,6 @@ public class ProductDTO {
         this.quantity = quantity;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
     public boolean isBonusItemEligible() {
         return isBonusItemEligible;
     }
@@ -41,8 +33,16 @@ public class ProductDTO {
         return true;
     }
 
-    public boolean decreaseQuantity(int quantity) {
+    public boolean decreaseQuantity(final int quantity) {
         this.quantity -= quantity;
         return true;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getQuantity() {
+        return quantity;
     }
 }

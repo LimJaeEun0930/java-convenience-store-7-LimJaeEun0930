@@ -64,7 +64,7 @@ public class InputView {
         }
     }
 
-    private boolean inputExceptQuantityOrNot(ProductDTO wishProduct) {
+    private boolean inputExceptQuantityOrNot(final ProductDTO wishProduct) {
         while (true) {
             String input = input(IN_BUY_WITH_REGULAR_PRICE_OR_NOT, wishProduct.getName(), calculateNoPromotionCount(wishProduct));
             if (input.equals("Y")) {
@@ -77,7 +77,7 @@ public class InputView {
         }
     }
 
-    private static int calculateNoPromotionCount(ProductDTO wishProduct) {
+    private static int calculateNoPromotionCount(final ProductDTO wishProduct) {
         return wishProduct.getQuantity() % products.get(wishProduct.getName()).getPromotion().getPromoPack()
                 + products.get(wishProduct.getName()).getPromotion().getPromoPack();
     }
@@ -101,7 +101,7 @@ public class InputView {
         return input;
     }
 
-    public ConfirmedPurchaseProducts inputGetMemberShipDiscountOrNot(ArrayList<ProductToCalculateDTO> productsToCalculate) {
+    public ConfirmedPurchaseProducts inputGetMemberShipDiscountOrNot(final ArrayList<ProductToCalculateDTO> productsToCalculate) {
         while (true) {
             String input = input(IN_MEMBERSHIP_DISCOUNT_OR_NOT);
             if (input.equals("Y")) {

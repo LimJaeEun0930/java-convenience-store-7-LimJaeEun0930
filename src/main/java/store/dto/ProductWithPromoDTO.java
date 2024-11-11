@@ -6,7 +6,7 @@ import store.Product;
 import store.Promotion;
 
 public class ProductWithPromoDTO extends ProductToCalculateDTO {
-    public ProductWithPromoDTO(ProductDTO productToBuy) {
+    public ProductWithPromoDTO(final ProductDTO productToBuy) {
         super();
         this.name = productToBuy.getName();
         Product product = products.get(productToBuy.getName());

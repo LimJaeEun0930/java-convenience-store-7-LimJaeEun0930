@@ -1,6 +1,6 @@
 package store.dto;
 
-import static store.Controller.Controller.isInPromotionDuration;
+import static store.Product.isInPromotionDuration;
 import static store.Product.products;
 
 import store.Product;
@@ -17,7 +17,7 @@ public abstract class ProductToCalculateDTO {
     protected ProductToCalculateDTO() {
     }
 
-    public static ProductToCalculateDTO getInstance(ProductDTO productDTO) {
+    public static ProductToCalculateDTO getInstance(final ProductDTO productDTO) {
         Product product = products.get(productDTO.getName());
         Promotion promotion = product.getPromotion();
         if (promotion != null) {

@@ -6,9 +6,7 @@ import static store.config.Constants.CANNOT_READ_FILE;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import store.Product;
-import store.dto.ProductToCalculateDTO;
 
 public class ProductManager {
 
@@ -21,13 +19,6 @@ public class ProductManager {
             }
         } catch (IOException e) {
             System.out.println(CANNOT_READ_FILE);
-        }
-    }
-
-    public static void updateProductFile(ArrayList<ProductToCalculateDTO> productsToApply) {
-        for (ProductToCalculateDTO productDelta : productsToApply) {
-            Product product = products.get(productDelta.getName());
-            product.applyDecreasement(productDelta);
         }
     }
 }
